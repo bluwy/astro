@@ -1,5 +1,40 @@
 # astro
 
+## 5.0.0-beta.4
+
+### Major Changes
+
+- [#12079](https://github.com/withastro/astro/pull/12079) [`7febf1f`](https://github.com/withastro/astro/commit/7febf1f6b58f2ed014df617bd7162c854cadd230) Thanks [@ematipico](https://github.com/ematipico)! - `params` passed in `getStaticPaths` are no longer automatically decoded.
+
+  ### [changed]: `params` aren't decoded anymore.
+
+  In Astro v4.x, `params` in were automatically decoded using `decodeURIComponent`.
+
+  Astro v5.0 doesn't automatically decode `params` in `getStaticPaths` anymore, so you'll need to manually decode them yourself if needed
+
+  #### What should I do?
+
+  If you were relying on the automatic decode, you'll need to manually decode it using `decodeURI`.
+
+  Note that the use of [`decodeURIComponent`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)) is discouraged for `getStaticPaths` because it decodes more characters than it should, for example `/`, `?`, `#` and more.
+
+  ```diff
+  ---
+  export function getStaticPaths() {
+    return [
+  +    { params: { id: decodeURI("%5Bpage%5D") } },
+  -    { params: { id: "%5Bpage%5D" } },
+    ]
+  }
+
+  const { id } = Astro.params;
+  ---
+  ```
+
+### Patch Changes
+
+- [#12097](https://github.com/withastro/astro/pull/12097) [`11d447f`](https://github.com/withastro/astro/commit/11d447f66b1a0f39489c2600139ebfb565336ce7) Thanks [@ascorbic](https://github.com/ascorbic)! - Fixes error where references in content layer schemas sometimes incorrectly report as missing
+
 ## 5.0.0-beta.3
 
 ### Minor Changes
