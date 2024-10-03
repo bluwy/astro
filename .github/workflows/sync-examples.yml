@@ -26,7 +26,7 @@ permissions:
 jobs:
   check_for_update:
     # Only allow running on `main` and `next` branch to prevent accidental sync overridding
-    if: ${{ github.repository_owner == 'withastro' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next') }}
+    if: ${{ true && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/next') }}
     name: Check for Updates
     runs-on: ubuntu-latest
     outputs:
