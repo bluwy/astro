@@ -1,0 +1,14 @@
+---
+import Bar from '../components/Foo.vue';
+import Parent from '../components/Parent.astro';
+---
+<html>
+	<head>
+		<title>Testing</title>
+	</head>
+	<body>
+		<Parent>
+			<Bar slot="footer" />
+		</Parent>
+	</body>
+</html>
